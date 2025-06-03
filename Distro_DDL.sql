@@ -1,114 +1,114 @@
 CREATE TABLE "Organization" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "org_name" varchar,
-  "date_created" datetime,
-  "date_updated" datetime
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 CREATE TABLE "Address" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "address_full" varchar,
   "number" varchar,
   "unit" varchar,
   "street" varchar,
   "latitute" varchar,
   "longitude" varchar,
-  "date_created" datetime,
-  "date_updated" datetime
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 CREATE TABLE "Neighbor" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "org_fk" int,
   "name_full" varchar,
   "first_name" varchar,
   "last_name" varchar,
-  "address_fk" varchar,
+  "address_fk" int,
   "phone" int,
   "email" varchar,
   "contact_method" varchar,
   "language_pref" varchar,
-  "date_created" datetime,
-  "date_updated" datetime
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 CREATE TABLE "Caller" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "name_full" varchar,
   "first_name" varchar,
   "last_name" varchar,
   "phone" varchar,
-  "spanish" binary,
-  "date_created" datetime,
-  "date_updated" datetime
+  "spanish" boolean,
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 CREATE TABLE "Outreach" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "neighbor_fk" int,
   "outreach_list_fk" int,
   "org_fk" int,
-  "completed" binary,
-  "responded" binary,
+  "completed" boolean,
+  "responded" boolean,
   "wants_bag" int,
-  "wants_supps" binary,
+  "wants_supps" boolean,
   "notes" varchar,
-  "date_created" datetime,
-  "date_updated" datetime
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 CREATE TABLE "Outreach_list" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "org_fk" int,
   "caller_fk" int,
   "status" varchar,
   "distro_date" date,
-  "date_created" datetime,
-  "date_updated" datetime
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 CREATE TABLE "Supplemental" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "item" varchar,
   "org_fk" int,
   "outreach_fk" int,
   "delivery_fk" int,
   "neighbor_fk" int,
-  "ordered" binary,
-  "date_created" datetime,
-  "date_updated" datetime
+  "ordered" boolean,
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 CREATE TABLE "Driver" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "name_full" varchar,
   "first_name" varchar,
   "last_name" varchar,
   "phone" varchar,
-  "date_created" datetime,
-  "date_updated" datetime
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 CREATE TABLE "Delivery" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "org_fk" int,
   "route_fk" int,
   "neighbor_fk" int,
   "notes" varchar,
-  "completed" binary,
+  "completed" boolean,
   "bag_count" int,
-  "date_created" datetime,
-  "date_updated" datetime
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 CREATE TABLE "Route" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "org_fk" int,
   "driver_fk" int,
   "status" varchar,
-  "distro_date" datetime,
-  "date_created" datetime,
-  "date_updated" datetime
+  "distro_date" timestamp,
+  "date_created" timestamp,
+  "date_updated" timestamp
 );
 
 ALTER TABLE "Neighbor" ADD FOREIGN KEY ("org_fk") REFERENCES "Organization" ("id");
